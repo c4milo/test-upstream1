@@ -1,3 +1,4 @@
 {
-  "blah": "foo"
+  "blah": "foo",
+  "foo": "bar"
 }
