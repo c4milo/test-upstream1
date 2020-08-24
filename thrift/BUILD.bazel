@@ -1,0 +1,70 @@
+load("@rules_thrift//thrift:defs.bzl", "thrift_library")
+
+thrift_library(
+    name = "user",
+    srcs = ["user.thrift"],
+    visibility = ["//visibility:public"],
+)
+
+thrift_library(
+    name = "team",
+    srcs = ["team.thrift"],
+    visibility = ["//visibility:public"],
+)
+
+thrift_library(
+    name = "channel",
+    srcs = ["channel.thrift"],
+    visibility = ["//visibility:public"],
+)
+
+thrift_library(
+    name = "team_membership",
+    srcs = ["team_membership.thrift"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//examples/thrift:team",
+    ],
+)
+
+thrift_library(
+    name = "organization",
+    srcs = ["organization.thrift"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//examples/thrift:channel",
+        "//examples/thrift:team",
+        "//examples/thrift:user",
+    ],
+)
+
+thrift_library(
+    name = "message",
+    srcs = ["message.thrift"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//examples/thrift:channel",
+        "//examples/thrift:user",
+    ],
+)
+
+thrift_library(
+    name = "channel_membership",
+    srcs = ["channel_membership.thrift"],
+    visibility = ["//visibility:public"],
+    deps = ["//examples/thrift:channel"],
+)
+
+thrift_library(
+    name = "slack-api",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//examples/thrift:channel",
+        "//examples/thrift:channel_membership",
+        "//examples/thrift:message",
+        "//examples/thrift:organization",
+        "//examples/thrift:team",
+        "//examples/thrift:team_membership",
+        "//examples/thrift:user",
+    ],
+)
